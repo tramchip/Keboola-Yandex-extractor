@@ -1,0 +1,35 @@
+```{r setup, include=FALSE}
+install.packages("dplyr")
+install.packages("tidyverse")
+```
+
+
+```{r setup, include=FALSE}
+install.packages("rym")
+```
+
+
+```{r}
+vignette("rym-reporting-api", package = "rym")
+```
+
+```{r}
+library(rym)
+rym_auth(login = 'jane.pham',token.path= getwd())
+
+```
+rym_get_counters(login = "jane.pham", token.path = getwd())
+```
+
+```{r}
+test_data <- rym_get_data(counters = "53903101",
+                                   date.from  = "2018-08-01",
+                                   date.to    = "2019-08-01",
+                                   dimensions = "ym:s:date",
+                                   accuracy   = "full",
+                                   login      = "jane.pham")
+```
+
+```{r}
+rym_get_logs(counter = "53903101", fields = "ym:s:date", date.from  = "2019-05-01", date.to = "2019-06-01", source = "visits", login = "jane.pham", token.path = getwd())
+```
