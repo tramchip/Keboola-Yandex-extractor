@@ -1,0 +1,44 @@
+---
+title: "yandex api"
+output: pdf_document
+---
+install library
+```{r setup, include=FALSE}
+install.packages("dplyr")
+install.packages("tidyverse")
+install.packages("rym")
+```
+
+authetication will appear as a pop up , log in username and password (jane.pham, nHA95kULmZRuECT ) . After that there will be a 7 digit code and you need to type the code in the console
+```{r}
+library(rym)
+rym_auth(login = 'jane.pham',token.path= getwd())
+
+```
+
+obtain counters id 
+
+```{r}
+rym_get_counters(login = "jane.pham", token.path = getwd())
+
+```
+
+
+input the counter id in counters and parameters in dimensions
+```{r}
+api_data <- rym_get_data(counters = "53903101",date.from  = "2018-08-01",
+                                   date.to    = "yesterday",
+                                   dimensions = "ym:s:date, ym:s:pageViews",
+                                   accuracy   = "full",
+                                   login      = NULL,
+             lang = "en" )
+
+print(api_data)
+```
+
+write file in csv
+```{r}
+write.csv(api_data, "api_data.csv")
+
+```
+
